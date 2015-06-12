@@ -29,13 +29,11 @@
 function onOpen() {
   var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
   var entries = [
-    {name : "Read Data", functionName : "readRows"},
     {name : "Get Spreadsheet ID", functionName : "getID"},
-    {name : "Get Last Row", functionName : "getLastRow"},
     {name : "Create Doc from Last Row", functionName : "createDocFromSheet"}
   ];
   spreadsheet.addMenu("Script Center Menu", entries);
-};
+}
 
 /**
  * Retrieves all the rows in the active spreadsheet that contain data and logs the
@@ -51,14 +49,14 @@ function readRows() {
     var row = values[i];
     Logger.log(row);
   }
-};
+}
 
 /**
  * Gathers the ID of the spreadsheet and can return it in a message box
  */
 function getID() {
   Browser.msgBox('Spreadsheet key: ' + SpreadsheetApp.getActiveSpreadsheet().getId());
-};
+}
 
 /**
  * Returns the value of the last column in the last row, weirdly appending tons of commas to the end
@@ -137,7 +135,7 @@ function createDocFromSheet(){
 function appendToDoc(source, destination) {
   for (var i = 0; i < source.getNumChildren(); i++) {
     appendElementToDoc(destination, source.getChild(i));
-  };
+  }
 }
  
 /**
