@@ -39,17 +39,17 @@ function onOpen() {
  * Retrieves all the rows in the active spreadsheet that contain data and logs the
  * values for each row.
  */
-function readRows() {
-  var sheet = SpreadsheetApp.getActiveSheet();
-  var rows = sheet.getDataRange();
-  var numRows = rows.getNumRows();
-  var values = rows.getValues();
+// function readRows() {
+//   var sheet = SpreadsheetApp.getActiveSheet();
+//   var rows = sheet.getDataRange();
+//   var numRows = rows.getNumRows();
+//   var values = rows.getValues();
 
-  for (var i = 0; i <= numRows - 1; i++) {
-    var row = values[i];
-    Logger.log(row);
-  }
-}
+//   for (var i = 0; i <= numRows - 1; i++) {
+//     var row = values[i];
+//     Logger.log(row);
+//   }
+// }
 
 /**
  * Gathers the ID of the spreadsheet and can return it in a message box
@@ -86,7 +86,7 @@ function createDocFromSheet(){
   var column = spreadsheetData[0]; // names column a column of spreadsheet data, so to be used with an input of a number
 
   var newDoc = DocumentApp.create("URS Submission - " + column[8] + " (" + column[3] + ")"); // name of new document
-  var newDocFile = DocsList.getFileById(newDoc.getId()); // getting file ID from the newDoc
+  //var newDocFile = DocsList.getFileById(newDoc.getId()); // getting file ID from the newDoc
   var setID = currentSpreadsheet.getDataRange().getCell(currentSpreadsheet.getLastRow(), currentSpreadsheet.getLastColumn()); //doing something not quite sure what
 
   setID.setValue(newDoc.getId()); // getting ID of newDoc
