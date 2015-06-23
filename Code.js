@@ -10,12 +10,6 @@
  * If the form ever changes or if anything ever happens the things that will need to be changed are the 
  * ID of the current spreadsheet (can use getID function for this), possibly templateID, column numbers and row
  * numbers, and the submissionFolderID if that's being used.
- *
- * Things for Emma to ask Stephanie:
- * - changing form to ask for all names in one line
- * - asking for co-presenter emails separately
- * - asking for t-shirt information simply as one question
- * - what parameters to have on the google documents and in what order
  */
 
 // ID of this spreadsheet: 1IkgJOguzDdZnF7MtzWWER1uXCgsBlbors7pQLeT_cHg
