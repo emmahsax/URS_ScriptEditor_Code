@@ -118,7 +118,7 @@ function createDocFromSheet(){
   //setID.setValue(newDoc.getId()); // putting ID into spreadsheet
   //var submissionFolder = DriveApp.getFolderById("0B-4Ru4UajECXdGFhMmJ0N1I5R0U"); // this ID is for the folder of the generated documents, found at the end of the URL
   //newDocFile.addToFolder(submissionFolder); // adds the newDoc to the submissionFolder, so not in some random place
- //newDocFile.removeFromFolder(newDocFile.getParents()[0]); // remove copy from root of Drive
+  //newDocFile.removeFromFolder(newDocFile.getParents()[0]); // remove copy from root of Drive
   
   spreadsheet.toast("Document Created"); // show message on spreadsheet that this function is over
 }
