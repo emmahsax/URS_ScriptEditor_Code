@@ -70,9 +70,6 @@ function getLastRow() {
  * The column numbers might have to change a fair amount depending on the actual spreadsheet when implemented. Also, whenever the form or spreadsheet columns change,
  * there is hardcoding involved, so someone would need to come in to change it in the code, but it isn't rocket science. Lastly, this code is under the assumption
  * that the form asks for names of people in one box, and then the emails following in one box.
- *
- * In form, change co-presenter and presenter naming to be one box for name, one for email for every person
- * In form, change t-shirt to simply be checkboxes for everyone regardless of their role in the process
  */
 function createDocFromSheet(){
   var spreadsheet = SpreadsheetApp.getActiveSpreadsheet(); // gets current spreadsheet
@@ -107,13 +104,13 @@ function createDocFromSheet(){
   //body.insertParagraph(54, column[20]); // room location
   //body.insertParagraph(58, column[21] + ", " + column[22]); // t-shirt information
   
-
   docFromTemplate.saveAndClose(); // save and close newDoc
   
   appendToDoc(docFromTemplate, newDoc); // append template copy to newDoc
 
   DriveApp.getFileById(newDocFromTemplateID).setTrashed(true); // delete temporary template file
-
+  
+  // IMPORTANT: the code below is finicky and sometimes works, while sometimes it just breaks things; use with caution and test carefully
   //var setID = currentSpreadsheet.getDataRange().getCell(currentSpreadsheet.getLastRow(), currentSpreadsheet.getLastColumn()); //putting ID into spreadsheet
   //setID.setValue(newDoc.getId()); // putting ID into spreadsheet
   //var submissionFolder = DriveApp.getFolderById("0B-4Ru4UajECXdGFhMmJ0N1I5R0U"); // this ID is for the folder of the generated documents, found at the end of the URL
