@@ -12,7 +12,7 @@
  * numbers, and the submissionFolderID if that's being used.
  */
 
-// ID of this spreadsheet: 1QoZFE6tM14d4CeJq23LiRvzGZnmSIv_gH33-mB0yJH0
+// ID of this spreadsheet: 1_5W2imD75wOPCGWlMtsfpbAHA74U9ieSs0y3XM4yvZ4
 
 /**
  * Adds a custom menu to the active spreadsheet, containing a single menu item
@@ -78,19 +78,19 @@ function createDocFromSheet(){
   var lastColumn = spreadsheet.getLastColumn(); // last column of spreadsheet
   var spreadsheetData = spreadsheet.getRange(lastRow, 1, lastRow, lastColumn).getValues(); // entire data of last row
 
-  var newDoc = DocumentApp.create("2016 URS - " + column[9] + " " + column[8]); // new document to be created
+  var column = spreadsheetData[0]; // makes column a column of the spreadsheet (to be used with an input of a number)
+  
+  var newDoc = DocumentApp.create("2017 URS - " + column[9] + " " + column[8]); // new document to be created
   var newDocFile = DriveApp.getFileById(newDoc.getId()); // ID of new file
   // IMPORTANT: hard-coded, do not change unless folder changes; ID found at end of URL
   // var submissionFolder = DriveApp.getFolderById("0B-4Ru4UajECXdGFhMmJ0N1I5R0U"); // ID of folder for generated documents
 
   // IMPORTANT: hard-coded, do not change unless template document changes; ID found at end of URL 
-  var templateID = "1FTXNICzBXEhFUExSZqdS9jxGenD2RcNDCYZSZd8XLsk"; // ID of the template of the documents
+  var templateID = "1ZCVZgVKn8mKDg6fTxgN6RxfFJUaEDCN5ruuFo6jr0EQ"; // ID of the template of the documents
   var newDocFromTemplateID = DriveApp.getFileById(templateID).makeCopy().getId(); // copy of the template
   var docFromTemplate = DocumentApp.openById(newDocFromTemplateID); // opened template copy
   var body = docFromTemplate.getActiveSection(); // body of the template copy
-
-  var column = spreadsheetData[0]; // makes column a column of the spreadsheet (to be used with an input of a number)
- 
+  
   // adding appropriate column values to the template copy; think of timestamp column as column[0]
   body.insertParagraph(2, column[16]); // discipline
   body.insertParagraph(6, column[9] + " " + column[8]); // primary presenter name
@@ -120,7 +120,7 @@ function createDocFromSheet(){
    * newDocFile.removeFromFolder(newDocFile.getParents()[0]); // removing newDoc from root of Drive
    */
   
-  spreadsheet.toast("Document Created"); // show message on spreadsheet that this function is over
+  SpreadsheetApp.getActiveSpreadsheet().toast("Document Created"); // show message on spreadsheet that this function is over
 }
 
 /**
