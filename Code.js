@@ -66,28 +66,32 @@ function getLastRow() {
 }
 
 /**
- * Uses the current spreadsheet and a template document to make a new document per row (upon submission of form) with all categories filled in.
- * The column numbers might have to change a fair amount depending on the actual spreadsheet when implemented. Also, whenever the form or spreadsheet columns change,
- * there is hardcoding involved, so someone would need to come in to change it in the code, but it isn't rocket science. Lastly, this code is under the assumption
+ * Uses the current spreadsheet and a template document to make a new document per row (upon submission of form) with
+ * all categories filled in. The column numbers might have to change a fair amount depending on the actual spreadsheet
+ * when implemented. Also, whenever the form or spreadsheet columns change, there is hard-coding involved, so someone
+ * would need to come in to change it in the code, but it isn't rocket science. Lastly, this code is under the assumption
  * that the form asks for names of people in one box, and then the emails following in one box.
  */
 function createDocFromSheet(){
-  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet(); // gets current spreadsheet
-  var currentSpreadsheet = spreadsheet.getActiveSheet(); // gets another version of current spreadsheet
-  var spreadsheetData = currentSpreadsheet.getRange(currentSpreadsheet.getLastRow(), 1, currentSpreadsheet.getLastRow(), currentSpreadsheet.getLastColumn()).getValues(); // gathers spreadsheet data of last row
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet(); // current spreadsheet
+  var lastRow = spreadsheet.getLastRow(); // last row of spreadsheet
+  var lastColumn = spreadsheet.getLastColumn(); // last column of spreadsheet
+  var spreadsheetData = spreadsheet.getRange(lastRow, 1, lastRow, lastColumn).getValues(); // entire data of last row
 
-  var column = spreadsheetData[0]; // names column a column of spreadsheet data, so to be used with an input of a number
+  var newDoc = DocumentApp.create("2016 URS - " + column[9] + " " + column[8]); // new document to be created
+  var newDocFile = DriveApp.getFileById(newDoc.getId()); // ID of new file
+  // IMPORTANT: hard-coded, do not change unless folder changes; ID found at end of URL
+  // var submissionFolder = DriveApp.getFolderById("0B-4Ru4UajECXdGFhMmJ0N1I5R0U"); // ID of the folder for generated documents
 
-  var newDoc = DocumentApp.create("2016 URS - " + column[9] + " " + column[8]); // name of new document
-  var newDocFile = DriveApp.getFileById(newDoc.getId()); // getting file ID from the newDoc
+  // IMPORTANT: hard-coded, do not change unless template document changes; ID found at end of URL 
+  var templateID = "1FTXNICzBXEhFUExSZqdS9jxGenD2RcNDCYZSZd8XLsk"; // ID of the template of the documents
+  var newDocFromTemplateID = DriveApp.getFileById(templateID).makeCopy().getId(); // copy of the template
+  var docFromTemplate = DocumentApp.openById(newDocFromTemplateID); // opened template copy
+  var body = docFromTemplate.getActiveSection(); // body of the template copy
 
-  var templateID = "1FTXNICzBXEhFUExSZqdS9jxGenD2RcNDCYZSZd8XLsk"; // this ID is for the template of the documents (hard-coded, do not change unless the template document changes)
-  var newDocFromTemplateID = DriveApp.getFileById(templateID).makeCopy().getId(); // making a copy of the template to be used with the newDoc
-  var docFromTemplate = DocumentApp.openById(newDocFromTemplateID); // opening template
-  var body = docFromTemplate.getActiveSection(); // getting the body of the new template
+  var column = spreadsheetData[0]; // makes column a column of the spreadsheet (to be used with an input of a number)
  
-  // adding appropriate column values to the newDoc
-  // IMPORTANT: think of timestamp column as column[0]
+  // adding appropriate column values to the template copy; think of timestamp column as column[0]
   body.insertParagraph(2, column[16]); // discipline
   body.insertParagraph(6, column[9] + " " + column[8]); // primary presenter name
   body.insertParagraph(10, column[11] + " " + column[10] + ", " + column[13] + " " + column[12]); // co-presenter names
@@ -98,24 +102,23 @@ function createDocFromSheet(){
   body.insertParagraph(30, column[20]); // feature presentation
   body.insertParagraph(34, column[7]); // willingness to change presentation type
   body.insertParagraph(38, column[25]); // additional comments
-  //body.insertParagraph(26, column[14]); // type of presentation
-  //body.insertParagraph(46, column[15]); // sponsoring funds
-  //body.insertParagraph(50, column[19]); // media services
-  //body.insertParagraph(54, column[20]); // room location
-  //body.insertParagraph(58, column[21] + ", " + column[22]); // t-shirt information
+  /* Optional other columns to add
+   * body.insertParagraph(26, column[14]); // type of presentation
+   * body.insertParagraph(46, column[15]); // sponsoring funds
+   * body.insertParagraph(50, column[19]); // media services
+   * body.insertParagraph(54, column[20]); // room location
+   * body.insertParagraph(58, column[21] + ", " + column[22]); // t-shirt information
+   */
   
-  docFromTemplate.saveAndClose(); // save and close newDoc
+  docFromTemplate.saveAndClose(); // saving and closing template copy
+  appendToDoc(docFromTemplate, newDoc); // merging template copy with newDoc
+  DriveApp.getFileById(newDocFromTemplateID).setTrashed(true); // deleting template copy
   
-  appendToDoc(docFromTemplate, newDoc); // append template copy to newDoc
-
-  DriveApp.getFileById(newDocFromTemplateID).setTrashed(true); // delete temporary template file
-  
-  // IMPORTANT: the code below is finicky and sometimes works, while sometimes it just breaks things; use with caution and test carefully
-  //var setID = currentSpreadsheet.getDataRange().getCell(currentSpreadsheet.getLastRow(), currentSpreadsheet.getLastColumn()); //putting ID into spreadsheet
-  //setID.setValue(newDoc.getId()); // putting ID into spreadsheet
-  //var submissionFolder = DriveApp.getFolderById("0B-4Ru4UajECXdGFhMmJ0N1I5R0U"); // this ID is for the folder of the generated documents, found at the end of the URL
-  //newDocFile.addToFolder(submissionFolder); // adds the newDoc to the submissionFolder, so not in some random place
-  //newDocFile.removeFromFolder(newDocFile.getParents()[0]); // remove copy from root of Drive
+  /* IMPORTANT: the code below is finicky and only sometimes works; use with caution and test carefully
+   * spreadsheet.getDataRange().getCell(lastRow, lastColumn).setValue(newDoc.getId()); // putting ID into spreadsheet
+   * newDocFile.addToFolder(submissionFolder); // adding the newDoc to the submissionFolder
+   * newDocFile.removeFromFolder(newDocFile.getParents()[0]); // removing newDoc from root of Drive
+   */
   
   spreadsheet.toast("Document Created"); // show message on spreadsheet that this function is over
 }
