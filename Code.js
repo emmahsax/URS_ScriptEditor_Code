@@ -81,7 +81,7 @@ function createDocFromSheet(){
   var newDoc = DocumentApp.create("2016 URS - " + column[9] + " " + column[8]); // new document to be created
   var newDocFile = DriveApp.getFileById(newDoc.getId()); // ID of new file
   // IMPORTANT: hard-coded, do not change unless folder changes; ID found at end of URL
-  // var submissionFolder = DriveApp.getFolderById("0B-4Ru4UajECXdGFhMmJ0N1I5R0U"); // ID of the folder for generated documents
+  // var submissionFolder = DriveApp.getFolderById("0B-4Ru4UajECXdGFhMmJ0N1I5R0U"); // ID of folder for generated documents
 
   // IMPORTANT: hard-coded, do not change unless template document changes; ID found at end of URL 
   var templateID = "1FTXNICzBXEhFUExSZqdS9jxGenD2RcNDCYZSZd8XLsk"; // ID of the template of the documents
