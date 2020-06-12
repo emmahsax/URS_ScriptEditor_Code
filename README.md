@@ -1,3 +1,3 @@
-# URS_GoogleScript_Code [![Code Climate](https://codeclimate.com/github/emmasax1/URS_ScriptEditor_Code/badges/gpa.svg)](https://codeclimate.com/github/emmasax1/URS_ScriptEditor_Code)
+# URS_GoogleScript_Code [![Maintainability](https://api.codeclimate.com/v1/badges/887c67c8d67e95d1842f/maintainability)](https://codeclimate.com/github/emmasax1/URS_ScriptEditor_Code/maintainability)
 
 This is original code, with the help of Hongya Zhou and a few other resources, mostly mentioned in the document itself, that is designed to be implemented as part of organization process for the Undergraduate Research Symposium at UMM. This was implemented fully first in February of 2015 for the 2015 URS, and then again in November of 2015 in preparation for the 2016 URS. the most recent time this was implemented was in January 2016 in preparation for the 2017 URS. Thinking really ahead this time!
