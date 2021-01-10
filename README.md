@@ -8,4 +8,4 @@ This repository has been archived and designated as read-only. From GitHub's doc
 
 > This will make the emmasax4/URS_ScriptEditor_Code repository, issues, pull requests, labels, milestones, projects, wiki, releases, commits, tags, branches, reactions and comments read-only and disable any future comments. The repository can still be forked.
 
-To unarchive this repository at any time, please contact [@emmasax4](mailto:emma.sax4@gmail.com).
+To unarchive this repository at any time, please reach out to me at https://emmasax4.com/contact-me/.
