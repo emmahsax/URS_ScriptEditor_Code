@@ -4,6 +4,14 @@ This is original code, with the help of Hongya Zhou and a few other resources, m
 
 ---
 
+### Contributing
+
+To submit a feature request, bug ticket, etc, please submit an official [GitHub Issue](https://github.com/emmahsax/URS_ScriptEditor_Code/issues/new).
+
+### Security Policy
+
+To report any security vulnerabilities, please view this repository's [Security Policy](https://github.com/emmahsax/URS_ScriptEditor_Code/security/policy).
+
 ### Licensing
 
 For information on licensing, please see [LICENSE.md](https://github.com/emmahsax/URS_ScriptEditor_Code/blob/main/LICENSE.md).
