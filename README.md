@@ -6,7 +6,7 @@ This is original code, with the help of Hongya Zhou and a few other resources, m
 
 ### Licensing
 
-For information on licensing, please see [LICENSE](https://github.com/emmahsax/URS_ScriptEditor_Code/blob/main/LICENSE.md).
+For information on licensing, please see [LICENSE.md](https://github.com/emmahsax/URS_ScriptEditor_Code/blob/main/LICENSE.md).
 
 ### Code of Conduct
 
