@@ -1,4 +1,4 @@
-#### BSD 3-Clause "New" or "Revised" License
+BSD 3-Clause "New" or "Revised" License
 
 Copyright (c) 2015 Emma Sax.
 All rights reserved.
